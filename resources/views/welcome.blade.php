@@ -462,32 +462,34 @@
                   <!-- .card-body -->
                   <div class="card-body">
                     <!-- .form -->
-                    <form method="post" action="{{url('/save')}}">
+                   
+                    <form method="post" action="{{url('/producto/update',$productos->id)}}">
                       <!-- .fieldset -->
+                    @method('put')  
                      @csrf
                         <fieldset>
                          <legend>Ingresar Producto</legend> <!-- .form-group -->
                         <div class="form-group">
-                          <label for="tf1">Producto</label> <input type="text" class="form-control" id="tf1" aria-describedby="tf1Help" name="producto"> <small id="tf1Help" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          <label for="tf1" >Producto</label> <input type="text" value="{{ $productos->producto}}" class="form-control" id="tf1" aria-describedby="tf1Help" name="producto"> <small id="tf1Help" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div><!-- /.form-group -->
                         <!-- .form-group -->
                         <div class="form-group">
                           <label for="tf2">Precio</label>
                           <div class="custom-number">
-                            <input type="number" class="form-control" id="tf2" min="0" max="10" step="1" value="0" name="precio" >
+                            <input type="number" value="{{ $productos->precio}}" class="form-control" id="tf2" min="0" max="10" step="1" value="0" name="precio" >
                           </div>
                         </div><!-- /.form-group -->
                         <!-- .form-group -->
                         <div class="form-group">
                           <label for="tf3">Cantidad</label>
                           <div class="custom-file">
-                            <input type="number" class="form-control" id="tf3" min="0" max="10" step="1" value="0" name="cantidad" > 
+                            <input type="number" value="{{ $productos->cantidad}}" class="form-control" id="tf3" min="0" max="10" step="1" value="0" name="cantidad" > 
                           </div>
                         </div><!-- /.form-group -->
                         <!-- .form-group -->
                         
                         <div class="form-actions">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <button class="btn btn-primary" type="submit">Actualizar</button>
                       </div>
                         <!-- .form-group -->
                         

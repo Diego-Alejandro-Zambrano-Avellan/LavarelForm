@@ -27,6 +27,16 @@ class ProductoController extends Controller
         return back();
     }
     public function edit($id){
-        return view('welcome');
+        $productos = productos::find($id);
+        return view('welcome',compact('productos'));
+    }
+    public function Update($id,Request $resquest){
+        $productos = productos::find($id);
+        $productos->producto = $resquest->producto;
+        $productos->precio = $resquest->precio;
+        $productos->cantidad = $resquest->cantidad;
+        $productos->save();
+        return redirect('/');
+        
     }
 }
