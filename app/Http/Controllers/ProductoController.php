@@ -13,9 +13,20 @@ class ProductoController extends Controller
         $productos->precio = $resquest->precio;
         $productos->cantidad = $resquest->cantidad;
         $productos->save();
-        
+        return back();
     }
     public function productos(){
-        return view('Productos.producto');
+
+        $productos =productos::all();
+        return view('Productos.producto',compact('productos'));
+     
+    }
+    public function delete($id){
+        $productos = productos::find($id);
+        $productos->delete();
+        return back();
+    }
+    public function edit($id){
+        return view('welcome');
     }
 }

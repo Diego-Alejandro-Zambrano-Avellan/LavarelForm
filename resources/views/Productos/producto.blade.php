@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css"><!-- END PLUGINS STYLES -->
+    <link rel="stylesheet" href="assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
     <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
@@ -484,6 +485,7 @@
                           </div>
                         </div><!-- /.form-group -->
                         <!-- .form-group -->
+                        
                         <div class="form-actions">
                         <button class="btn btn-primary" type="submit">Guardar</button>
                       </div>
@@ -495,65 +497,70 @@
                         
                       </fieldset><!-- /.fieldset -->
                     </form><!-- /.form -->
+                    
                   </div><!-- /.card-body -->
                   <!-- .card-body -->
                   
                   <!-- .card-body -->
                   
                 </div><!-- /.card -->
-
+               
             <!-- .page-inner -->
-            <div class="page-inner">
-              <!-- .page-title-bar -->
-              <header class="page-title-bar">
-                <div class="d-flex flex-column flex-md-row">
-                  <p class="lead">
-                    <span class="font-weight-bold">Hi, Beni.</span> <span class="d-block text-muted">Here’s what’s happening with your business today.</span>
-                  </p>
-                  <div class="ml-auto">
-                    <!-- .dropdown -->
-                    <div class="dropdown">
-                      <button class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>This Week</span> <i class="fa fa-fw fa-caret-down"></i></button> <!-- .dropdown-menu -->
-                      <div class="dropdown-menu dropdown-menu-right dropdown-menu-md stop-propagation">
-                        <div class="dropdown-arrow"></div><!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpToday" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpToday"><span>Today</span> <span class="text-muted">Mar 27</span></label>
-                        </div><!-- /.custom-control -->
-                        <!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpYesterday" name="dpFilter" data-start="2019/03/26" data-end="2019/03/26"> <label class="custom-control-label d-flex justify-content-between" for="dpYesterday"><span>Yesterday</span> <span class="text-muted">Mar 26</span></label>
-                        </div><!-- /.custom-control -->
-                        <!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpWeek" name="dpFilter" data-start="2019/03/21" data-end="2019/03/27" checked> <label class="custom-control-label d-flex justify-content-between" for="dpWeek"><span>This Week</span> <span class="text-muted">Mar 21-27</span></label>
-                        </div><!-- /.custom-control -->
-                        <!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpMonth" name="dpFilter" data-start="2019/03/01" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpMonth"><span>This Month</span> <span class="text-muted">Mar 1-31</span></label>
-                        </div><!-- /.custom-control -->
-                        <!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpYear" name="dpFilter" data-start="2019/01/01" data-end="2019/12/31"> <label class="custom-control-label d-flex justify-content-between" for="dpYear"><span>This Year</span> <span class="text-muted">2019</span></label>
-                        </div><!-- /.custom-control -->
-                        <!-- .custom-control -->
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="dpCustom" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label" for="dpCustom">Custom</label>
-                          <div class="custom-control-hint my-1">
-                            <!-- datepicker:range -->
-                            <input type="text" class="form-control" id="dpCustomInput" data-toggle="flatpickr" data-mode="range" data-disable-mobile="true" data-date-format="Y-m-d"> <!-- /datepicker:range -->
-                          </div>
-                        </div><!-- /.custom-control -->
-                      </div><!-- /.dropdown-menu -->
-                    </div><!-- /.dropdown -->
-                  </div>
-                </div>
+            
               </header><!-- /.page-title-bar -->
               <!-- .page-section -->
               <div class="page-section">
                 <!-- .section-block -->
                 
                 <!-- grid row -->
-                
+                <div class="table-responsive">
+                        <!-- .table -->
+                        <table class="table table-striped">
+                          <!-- thead -->
+                          <thead class="thead-">
+                            <tr>
+                              <th>ID</th>
+                              <th style="min-width:200px"> Producto </th>
+                              <th> Precio </th>
+                              <th> Cantidad </th>
+                              <th style="width:100px; min-width:100px;"> Acciones</th>
+                            </tr>
+                          </thead><!-- /thead -->
+                          <!-- tbody -->
+                          <tbody>
+                            @foreach($productos as $item)
+                            <tr>
+                              <td> {{$loop->index+1}} </td>
+                              <td> {{$item->producto}} </td>
+                              <td> {{$item->precio}} </td>
+                              <td> {{$item->cantidad}} </td>
+
+                              <td class="text-center">
+                              <a href="{{url('/edit/producto',$item->id)}}" class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></a> <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></a>
+                               
+                              <form action="/delete/producto/{{ $item->id }}" method="post">
+                                  @method('delete')
+                                  @csrf
+                                   <button type="submit" class="btn btn-sn bt-icon btn-secondary" >
+                                     <i class="far fa-trash-alt"></i>
+                                  <span class="sr-only">Remove</span>
+                                     </button>>
+                                </form>
+
+                            </td>
+                            </tr><!-- /tr -->
+                            @endforeach
+                            <!-- tr -->
+                            
+                            <!-- tr -->
+                            
+                            <!-- tr -->
+                            
+                            <!-- tr -->
+                           
+                          </tbody><!-- /tbody -->
+                        </table><!-- /.table -->
+                      </div><!-- /.table-responsive -->
                   
                         
                         
